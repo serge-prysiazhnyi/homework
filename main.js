@@ -1,76 +1,115 @@
+// # Практика
+console.log("# Практика");
 // 1
 console.log("#1");
-function showArrayCentralElements(Arr) {
-    var CentralElements = [];
-    if (Arr.length % 2 == 0) {
-        CentralElements.push(Arr[Arr.length / 2 - 1]);
-        CentralElements.push(Arr[Arr.length / 2]);
-    } else {
-        CentralElements.push(Arr[Math.ceil((Arr.length - 1) / 2)]);
+function inArray(textItem, Arr) {
+    for(i = 0; i < Arr.length; i++) {
+        if (Arr[i] == textItem) {
+            return true;
+        } 
     }
-    return CentralElements;
+    return false;
 }
-console.log(showArrayCentralElements([1, 2, 3, 4, 5, 6, 7, 8, 9]));
-console.log(showArrayCentralElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+console.log(inArray('hello', ['svnj', 'hello', 'cvpoq']));
+// # Лекция
+console.log("# Лекция");
+// 1
+console.log("#1");
+obj = {
+    x: 10,
+    y: 20,
+    inner: {
+        x: 20,
+        z: 30
+    },
+    foo2: {
+        k: 23,
+        p: 13
+    }
+}
+function convert(obj) {
+    for(key in obj) {
+        if(typeof obj[key] == "object") {
+            for (keyInner in obj[key]) {
+                obj[keyInner] = obj[key][keyInner];
+            }
+            delete obj[key];
+        }
+    }
+    return obj;
+}
+console.log(convert(obj));
 // 2
 console.log("#2");
-function doFunction(x, y, callback) {
-    let counter = 0;
-    for (var i = 0; i < arguments.length; i++) {
-        if (typeof arguments[i] == "number") {
-            counter++;
-        }
-    }
-    if (counter == 1) {
-        console.log("counter: " + counter);
-        return factorial(x);
-    }
-        return callback(x, y);
-}
-function power(x, y) {
-    let res = x;
-    for (var i = 1; i < y; i++) {
-        res *=x;
-    }
+let list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+function myPop() {
+    let res = this[this.length - 1];
+    this.length--;
     return res;
 }
-console.log(doFunction(2, 3, power));
+list.myPop = myPop;
+console.log(list.myPop());
+
+function myPush(item) {
+    this[this.length] = item;
+    return this.length;
+}
+list.myPush = myPush;
+console.log(list.myPush(9));
+
+function mySplice() {
+    if(arguments.length < 2) {
+        return;
+    }
+    var pos = arguments[0],
+        count = arguments[1],
+        res = []
+        insertArr = [];
+    for(var i = 1; i <= count; i++) {
+        res[res.length] = this[pos + i -1];
+    }
+    for(var i = pos + count, j = 0; i < this.length; i++, j++) {
+        this[pos + j] = this[i];
+    }
+    for(var i = 2; i < arguments.length; i++) {
+        insertArr[insertArr.length] = arguments[i];
+    }
+    for(var i = insertArr.length - 1; i >= 0 ; i--) {
+        var item = insertArr[i];
+        this.length++;
+        for (var j = this.length - 1; j > pos; j-- ) {
+            this[j] = this[j - 1];
+        }
+        this[pos] = item;
+    }
+    this.length -= count;
+    return res;
+}
+list = [2,3,42,4,25,213,1,2];
+list.mySplice = mySplice;
+console.log(list.mySplice(2, 4,'first', 'second', 'third'));
+console.log(list);
+
 // 3
 console.log("#3");
-function sum(x, y) {
-    return x + y;
+function assignObjects(obj1, obj2) {
+    for(key in obj2) {
+        obj1[key] = obj2[key];
+    }
+    return obj1
 }
-function div(x, y) {
-    return x / y;
-}
-function mul(x, y) {
-    return x * y;
-}
-console.log(doFunction(16, -23, mul));
-// 4
-console.log("#4");
-function factorial(x) {
-    return (x != 1) ? x * factorial(x - 1) : 1;
-}
-console.log(doFunction(6, factorial));
-// 5
-console.log("#5");
-var Some = Factory([[2, 7], [3, 9, 6], [4], [2, 2, 2], [1]]);
-function Factory(list) {
-    let counter = 0;
-    return function() {// Some
-        counter++
-        let arrayNumber = counter;
-        return function() {//struct function
-            return list[arrayNumber];;
+console.log(assignObjects({ x: 10, y: 20 }, { z: 30 }));
+console.log(assignObjects({ x: 10 }, { x: 20, y: 30 }));
+// # Практика
+// 2&3
+console.log("#2&3");
+function newAssignObjects(obj1, obj2, flag = false) {
+    for (var key in obj2) {
+        if (!obj1.hasOwnProperty(key) || flag === false) {
+            obj1[key] = obj2[key];
         }
     }
+    return obj1
 }
-var struct_1 = Some(); 
-var struct_2 = Some(); 
-var struct_3 = Some(); 
-console.log(struct_1());
-console.log(struct_1());
-console.log(struct_1());
-console.log(struct_2());
-console.log(struct_3());
+console.log(newAssignObjects({ x: 10, y: 20 }, { z: 30 }, true));
+console.log(newAssignObjects({ x: 10 }, { x: 20, y: 30 }, true));
