@@ -1,123 +1,149 @@
-document.write('1)');
-document.write('<br>');
-let A = [];
-let B = [];
-A.length = 10;
-nextNumber:
-for (i = 0; i < A.length; i++) {
-    A[i] = Math.floor(Math.random() * 100);
-    
-    for (j = 2; j < A[i]; j++) {
-        if (A[i] % j == 0 || A[i] == 0 || A[i] == 1 ) {
-            continue nextNumber; 
-        }
-    }
-    B.push(A[i]);
-}
-let min = A[0];
-let max = A[0];
-let minItemNumber = 0;
-let maxItemNumber = 0;
-for (i = 0; i < A.length; i++) {
-    if (A[i] < min) {
-        min = A[i];
-        minItemNumber = i;
-    }
-    if (A[i] > max) {
-        max = A[i];
-        maxItemNumber = i;
-    }
-}
-document.write("Массив A: " + A);
-document.write('<br>');
-document.write("Массив B: " + B);
-document.write('<br>');
-document.write("Min: " + min);
-document.write('<br>');
-document.write("Max: " + max);
-// 2
-document.write('<br>');
-document.write('2)');
-B.splice(0, B.length)
-if (minItemNumber < maxItemNumber) {
-    for (i = minItemNumber + 1; i < maxItemNumber; i++) {
-        B.push(A[i]);
-    }
-} else {
-    for (i = maxItemNumber + 1; i < minItemNumber; i++) {
-        B.unshift(A[i]);
-    }
-}
-document.write('<br>');
-document.write("Массив B: " + B);
-// 3
-document.write('<br>');
-document.write('3)');
-let buffer = 0;
-buffer = A[minItemNumber];
-A[minItemNumber] = A[maxItemNumber];
-A[maxItemNumber] = buffer;
-document.write('<br>');
-document.write("Min: " + A[minItemNumber]);
-document.write('<br>');
-document.write("Max: " + A[maxItemNumber]);
-// 4
-document.write('<br>');
-document.write('4)');
-document.write('<br>');
-document.write("Массив A: " + A);
+// 1
+document.write("1)" + "<br>");
+let n = +prompt('Число елементов в массиве','');
+let Arr = [];
 let temp;
-for (i = 0, j = A.length - 1; i < j; i++, j--) {
-    temp = A[j];
-    A[j] = A[i];
-    A[i] = temp;
+Arr.length = n;
+for (i = 0; i < Arr.length; i++) {
+    Arr[i] = Math.floor(Math.random() * 10);
 }
-document.write('<br>');
-document.write("Перевернутый массив A: " + A);
-//  5
-document.write('<br>');
-document.write('5)');
-j = 0;
-for (i = 0; i < A.length; i++) {
-    if (A[0] >= min + 5) {
-        j++
+document.write(Arr + "<br>");
+if (Arr.length % 2 == 0) {
+    for (i = 0, j = 1; j < Arr.length; i += 2, j += 2) {
+        temp = Arr[i];
+        Arr[i] = Arr[j];
+        Arr[j] = temp;
+    }
+}   else {
+    for (i = 0, j = 1; j < Arr.length - 1; i += 2, j += 2) {
+        temp = Arr[i];
+        Arr[i] = Arr[j];
+        Arr[j] = temp;
     }
 }
-document.write('<br>');
-document.write("Количество элементов отличающихся от минимального на 5: " + j);
-// 6
-document.write('<br>');
-document.write('6)');
-buffer = 0;
-C = [];
-D = [];
-C.length = 10;
-D.length = 10;
-let eqNum = 0;
-for (i = 0; i < C.length; i++) {
-    C[i] = Math.floor(Math.random() * 100);
+document.write(Arr + "<br>");
+// 2
+document.write("2)" + "<br>");
+n = 10;
+let m = 20;
+Arr = new Array(n);
+for (i = 0; i < Arr.length; i++) {
+    Arr[i] = new Array(m);
 }
-for (i = 0; i < D.length; i++) {
-    D[i] = Math.floor(Math.random() * 100);
+for (i = 0; i < Arr.length; i++) {
+    for (j = 0; j < Arr[i].length; j++) {
+        Arr[i][j] = Math.floor(Math.random() * 90 + 10);
+    }
 }
-for (i = 0; i < C.length; i++) {
-    for (j = 0; j < D.length; j++) {
-        if(C[i] == D[j]) {
-            buffer = C[0];
-            C[0] = C[i];
-            C[i] = buffer;
-            C.shift();
-            buffer = D[0];
-            D[0] = D[j];
-            D[j] = buffer;
-            D.shift();
-            eqNum++;
+let rowSum = 0;
+let min;
+let max;
+let minRowNumber = 0;
+let maxRowNumber = 0;
+for (i = 0; i < 1; i++) {
+    for (j = 0; j < m; j++) {
+        rowSum += Arr[i][j];
+        min = rowSum;
+        max = rowSum;
+    }
+}
+rowSum = 0;
+for (i = 0; i < Arr.length; i++) {
+    for (j = 0; j < Arr[i].length; j++) {
+        rowSum += Arr[i][j];
+    }
+    if (min > rowSum) {
+        min = rowSum;
+        minRowNumber = i;
+    }
+    if (max < rowSum) {
+        max = rowSum;
+        maxRowNumber = i;
+    }
+    rowSum = 0;
+}
+
+for(j = 0; j < m; j++) {
+    temp = Arr[minRowNumber][j];
+    Arr[minRowNumber][j] = Arr[maxRowNumber][j];
+    Arr[maxRowNumber][j] = temp;
+}
+document.write("Min: " + min + "<br>");
+document.write("Max: " + max + "<br>");
+document.write("Min row number: " + minRowNumber + "<br>");
+document.write("Max row number: " + maxRowNumber + "<br>");
+for (i = 0; i < Arr.length; i++) {
+    for (j = 0; j < Arr[i].length; j++) {
+        document.write(Arr[i][j] + ' ');
+    }
+    document.write("<br>");
+}
+// 2
+document.write("# Лекция" + "<br>");
+document.write("2)" + "<br>");
+n = 10;
+m = 10;
+A = new Array(n);
+for (i = 0; i <A.length; i++) {
+    A[i] = new Array(m);
+}
+for (i = 0; i < A.length; i++) {
+    for (j = 0; j < A[i].length; j++) {
+        A[i][j] = Math.floor(Math.random() * 90 + 10);
+        document.write(A[i][j] + ' ');
+    }
+    document.write("<br>");
+}
+min = A[0][0];
+for(i = 1; i < A.length; i +=2) {
+    for(j = 0; j < A[i].length ; j++) {
+        if (min > A[i][j]) {
+            min = A[i][j];
         }
     }
 }
-document.write('<br>');
-document.write('Массив C: ' + C);
-document.write('<br>');
-document.write('Массив D: ' + D);
-document.write('<br>');
-document.write('Количество повторяющихся элементов: ' + eqNum);
+document.write("Min is: " + min + "<br>");
+// 3
+document.write("3)" + "<br>");
+n = 10;
+m = 10;
+A = new Array(n);
+let sum = 0;
+let averageValue;
+for (i = 0; i < A.length; i++) {
+    A[i]= new Array(m);
+}
+for (i = 0; i < A.length; i++) {
+    for (j = 0; j < A[i].length; j++) {
+        A[i][j] = Math.floor(Math.random() * 90 + 10);
+        sum += A[i][j];
+        document.write(A[i][j] + " ");
+    }
+    document.write("<br>");
+}
+averageValue = sum / (n * m);
+document.write("averageValue: " + averageValue + "<br>");
+document.write("Элементы массива, которые сильно отклоняются от среднего значения:" + "<br>");
+for (i = 0; i < A.length; i++) {
+    for (j = 0; j < A[i].length; j++) {
+        if (((A[i][j] - averageValue) / averageValue) > 0.7 || ((A[i][j] - averageValue) / averageValue) < -0.7) {
+            document.write(A[i][j] + " ");
+        }
+    }
+}
+document.write("<br>");
+// 4
+document.write("4)" + "<br>");
+let count = 1;
+A = [0,0,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1];
+let B = [];
+for (i = 1; i < A.length; i++) {
+    if (A[i] == A[i - 1] ) {
+        count++;
+    }   else {
+        B.push(count);
+        count = 1;
+    }
+}
+B.push(count);
+document.write(B + "<br>");
