@@ -1,0 +1,15 @@
+let r = +prompt('Радиус','');
+let s = Math.PI * r * r;
+let h = +prompt('Высота','');
+let v = s * h;
+document.write('**************' + '<br \/>');
+document.write('<br \/>');
+document.write('Обьем цилиндра с площадью основы' + ' ' + s + ' ' + ', радиусом' + ' ' + r + ' ' + 'и высотой' + ' ' + h + ' ' + 'равен:' + '<br \/>');
+document.write('<br \/>');
+document.write('--------------------' + '<br \/>');
+document.write('<br \/>');
+document.write('V =' + ' ' + v + '.' + '<br \/>');
+document.write('<br \/>');
+document.write('-------------------' + '<br \/>');
+document.write('<br \/>');
+document.write('end.');
