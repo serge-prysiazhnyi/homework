@@ -1,149 +1,105 @@
 // 1
-document.write("1)" + "<br>");
-let n = +prompt('Число елементов в массиве','');
-let Arr = [];
-let temp;
-Arr.length = n;
-for (i = 0; i < Arr.length; i++) {
-    Arr[i] = Math.floor(Math.random() * 10);
-}
-document.write(Arr + "<br>");
-if (Arr.length % 2 == 0) {
-    for (i = 0, j = 1; j < Arr.length; i += 2, j += 2) {
-        temp = Arr[i];
-        Arr[i] = Arr[j];
-        Arr[j] = temp;
+console.log('#1');
+function fillArray() {
+    let n = +prompt("n = ?","");
+    let m = +prompt("m = ?","");
+    let A = [];
+    A.length = n;
+    for (i = 0; i < A.length; i++) {
+        A[i] = new Array(m);
     }
-}   else {
-    for (i = 0, j = 1; j < Arr.length - 1; i += 2, j += 2) {
-        temp = Arr[i];
-        Arr[i] = Arr[j];
-        Arr[j] = temp;
-    }
-}
-document.write(Arr + "<br>");
-// 2
-document.write("2)" + "<br>");
-n = 10;
-let m = 20;
-Arr = new Array(n);
-for (i = 0; i < Arr.length; i++) {
-    Arr[i] = new Array(m);
-}
-for (i = 0; i < Arr.length; i++) {
-    for (j = 0; j < Arr[i].length; j++) {
-        Arr[i][j] = Math.floor(Math.random() * 90 + 10);
-    }
-}
-let rowSum = 0;
-let min;
-let max;
-let minRowNumber = 0;
-let maxRowNumber = 0;
-for (i = 0; i < 1; i++) {
-    for (j = 0; j < m; j++) {
-        rowSum += Arr[i][j];
-        min = rowSum;
-        max = rowSum;
-    }
-}
-rowSum = 0;
-for (i = 0; i < Arr.length; i++) {
-    for (j = 0; j < Arr[i].length; j++) {
-        rowSum += Arr[i][j];
-    }
-    if (min > rowSum) {
-        min = rowSum;
-        minRowNumber = i;
-    }
-    if (max < rowSum) {
-        max = rowSum;
-        maxRowNumber = i;
-    }
-    rowSum = 0;
-}
-
-for(j = 0; j < m; j++) {
-    temp = Arr[minRowNumber][j];
-    Arr[minRowNumber][j] = Arr[maxRowNumber][j];
-    Arr[maxRowNumber][j] = temp;
-}
-document.write("Min: " + min + "<br>");
-document.write("Max: " + max + "<br>");
-document.write("Min row number: " + minRowNumber + "<br>");
-document.write("Max row number: " + maxRowNumber + "<br>");
-for (i = 0; i < Arr.length; i++) {
-    for (j = 0; j < Arr[i].length; j++) {
-        document.write(Arr[i][j] + ' ');
-    }
-    document.write("<br>");
-}
-// 2
-document.write("# Лекция" + "<br>");
-document.write("2)" + "<br>");
-n = 10;
-m = 10;
-A = new Array(n);
-for (i = 0; i <A.length; i++) {
-    A[i] = new Array(m);
-}
-for (i = 0; i < A.length; i++) {
-    for (j = 0; j < A[i].length; j++) {
-        A[i][j] = Math.floor(Math.random() * 90 + 10);
-        document.write(A[i][j] + ' ');
-    }
-    document.write("<br>");
-}
-min = A[0][0];
-for(i = 1; i < A.length; i +=2) {
-    for(j = 0; j < A[i].length ; j++) {
-        if (min > A[i][j]) {
-            min = A[i][j];
+    for (i = 0; i < A.length; i++) {
+        for (j = 0; j < A[i].length; j++) {
+            A[i][j] = Math.floor(Math.random() * 90 + 10);
         }
     }
+    return A;
 }
-document.write("Min is: " + min + "<br>");
-// 3
-document.write("3)" + "<br>");
-n = 10;
-m = 10;
-A = new Array(n);
-let sum = 0;
-let averageValue;
-for (i = 0; i < A.length; i++) {
-    A[i]= new Array(m);
-}
-for (i = 0; i < A.length; i++) {
-    for (j = 0; j < A[i].length; j++) {
-        A[i][j] = Math.floor(Math.random() * 90 + 10);
-        sum += A[i][j];
-        document.write(A[i][j] + " ");
-    }
-    document.write("<br>");
-}
-averageValue = sum / (n * m);
-document.write("averageValue: " + averageValue + "<br>");
-document.write("Элементы массива, которые сильно отклоняются от среднего значения:" + "<br>");
-for (i = 0; i < A.length; i++) {
-    for (j = 0; j < A[i].length; j++) {
-        if (((A[i][j] - averageValue) / averageValue) > 0.7 || ((A[i][j] - averageValue) / averageValue) < -0.7) {
-            document.write(A[i][j] + " ");
+console.log(fillArray());
+// 2
+console.log('#2');
+let A = [2, 5, "str", 6, 7, 43, "str", 9, "str",];
+let B = ["str", 5, 56, 3, 78, 24, "str", 4, 8, "str",];
+function compareArray(A, B) {
+    let sumA = 0;
+    for (i = 0; i < A.length; i++) {
+        if (typeof A[i] == "number") {
+            sumA += A[i];
         }
     }
-}
-document.write("<br>");
-// 4
-document.write("4)" + "<br>");
-let count = 1;
-A = [0,0,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1];
-let B = [];
-for (i = 1; i < A.length; i++) {
-    if (A[i] == A[i - 1] ) {
-        count++;
+    let sumB = 0;
+    for (i = 0; i < B.length; i++) {
+        if (typeof B[i] == "number") {
+            sumB += B[i];
+        }
+    }
+    if (sumA > sumB) {
+        return A;
     }   else {
-        B.push(count);
-        count = 1;
+        return B;
     }
 }
-B.push(count);
-document.write(B + "<br>");
+console.log(compareArray(A, B));
+// 3
+console.log('#3');
+let x = +prompt('x = ?','');
+let y = +prompt('y = ?','');
+let znak = prompt('znak = ?','');
+function doMath(x, znak, y) {
+    var res = 0;
+    switch (znak) {
+        case '+': 
+        res = x + y;
+        break;
+        case '-': 
+        res = x - y;
+        break;
+        case '*': 
+        res = x * y;
+        break;
+        case '/': 
+        res = x / y;
+        break;
+        case '%': 
+        res = x % y;
+        break;
+        case '^': 
+        res = x ^ y;
+        break;
+    }
+    return res;
+}
+console.log(doMath(x, znak, y));
+// 4 
+console.log('#4');
+let str = "hello world";
+function removeLetters(l1, l2) {
+    // var l1;
+    // var l2;
+    A = [];
+    B = [];
+    A = str.split('');
+    for (i = 0; i < A.length; i++) {
+        if (A[i] !== l1 && A[i] !== l2) {
+            B.push(A[i]);
+        }
+    }
+    return B.join('');
+}
+console.log(removeLetters("l","d"));
+// 5
+console.log('#5');
+A = [4, 23, 5, 64, 78, 4, 62, 7];
+function filter(Arr, callback) {
+    var newArr = [];
+    for (var i = 0; i < Arr.length; i++) {
+        if (callback(Arr[i]) == true) {
+            newArr.push(Arr[i]);
+        }
+    }
+    return newArr;
+}
+function isEven(x) {
+    return x % 2 == 0;
+}
+console.log(filter(A, isEven));
