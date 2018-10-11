@@ -1,67 +1,30 @@
-// 1
-console.log("#1");
-function doFunction(x, y, callback) {
-    this.result = callback(x, y);
-    return this;
-};
-function clear() {
-    this.result = 0;
-    return this;
-};
-function copy(value) {
-    this["buffer"] = value;
-    return this;
-};
-function sum(a, b) {
-    return a + b;
-};
-var obj = {
-    copy: copy,
-    clear: clear,
-    doFunction: doFunction
-};
-console.log(obj.doFunction(2, 3, sum).clear().copy(123));
-// 2
-console.log("#2");
-var str = "&#39;var_text_hello&#39;";
-str = str.slice(0,5) + str.slice(5,8) + str.slice(9,10).toLocaleUpperCase()
- + str.slice(10,13) + str.slice(14,15).toLocaleUpperCase() + str.slice(15,24);
-console.log(str);
-// 3
-console.log("#3");
-function inArray(text, Arr) {
-    for(var i = 0; i < Arr.length; i++) {
-        if(Arr[i].indexOf(text) !== -1) {
-            return true;
-        }
-    }
-    return false;
+function SuperMath() {
+     
 }
-console.log(inArray('foo', ['sjhfnaof', 'affooasf', 'dfhdfhdfh']));
-// 4
-console.log("#4");
-function addRecord(flag) {
-    var flag = arguments[length - 1] || false;
-    if(arguments.length === 0) {
-      return this;
+SuperMath.prototype.check = function (obj) {
+    while (!confirm("" + obj.x + " " + obj.znak + " " + obj.y)) {
+        obj.x = +prompt("x = ?","");
+        obj.znak = prompt("znak = ?","");
+        if(obj.znak !== "+" && obj.znak !== "-" && obj.znak !== "*" && obj.znak !== "/"){return alert('Error!')};
+        obj.y = +prompt("y = ?","");
     }
-    for(i=0;i<arguments.length;i++) {
-      if(typeof arguments[i] != "object") {
-        continue;
-      } else {
-        if(flag === false || !this[key]) {
-          for(key in arguments[i]) {
-            this[key] = arguments[i][key];
-          }
-        }
-      }
+    let res = null;
+    switch(obj.znak) {
+        case '+':
+        res = obj.x + obj.y;
+        break;
+        case '-':
+        res = obj.x - obj.y;
+        break;
+        case '*':
+        res = obj.x * obj.y;
+        break;
+        case '/':
+        res = obj.x / obj.y;
+        break;
     }
-    return this;
+    return res;
 }
-var data = {
-    addRecord: addRecord,
-    p: 600,
-    str: 'hello',
-    y: -50
-};
-console.log( data.addRecord({x: 10},{y: 20}, {z:30}, {p: 50}) );
+p = new SuperMath();
+myObj = { x:12, y:3, znak:"/"};
+console.log(p.check(myObj));
