@@ -6,13 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body{
-            font-family: monospace;
-            font-size: 2rem;
+        .container {
+            display: flex;
+            flex-flow: column;
         }
+        .flex-item {
+            max-width: 20%;
+            margin: 10px;
+            font-size: 1.5rem;
+            }
     </style>
 </head>
 <body>
+    <div class="container">
+        <input class="flex-item"  type="text">
+        <input class="flex-item"  type="text">
+        <input class="flex-item"  type="text">
+        <textarea class="flex-item"  name="textarea" id="myTextArea" cols="30" rows="10"></textarea>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
