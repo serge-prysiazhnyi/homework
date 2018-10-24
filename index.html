@@ -4,26 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        .container {
-            display: flex;
-            flex-flow: column;
-        }
-        .flex-item {
-            max-width: 20%;
-            margin: 10px;
-            font-size: 1.5rem;
-            }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <title>LIVE SERVER</title>
 </head>
 <body>
     <div class="container">
-        <input class="flex-item"  type="text">
-        <input class="flex-item"  type="text">
-        <input class="flex-item"  type="text">
-        <textarea class="flex-item"  name="textarea" id="myTextArea" cols="30" rows="10"></textarea>
+            <input type="range" id="rangeInput" min="0" max="100">
+            <input type="text" id="textInput">
+        <div class="diagram">
+            <div id="value-block">
+                <div class="position-relative">
+                    <div id="commission-block"></div>
+                </div>
+            </div>
+        </div>
+        <div id="value"></div>
     </div>
-    <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
