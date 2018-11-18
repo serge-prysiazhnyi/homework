@@ -1,0 +1,20 @@
+body {
+    position: relative;
+}
+.list, li {
+    list-style: none;
+}
+.btn {
+    margin: 1rem 0px;
+}
+.img-item{
+    display: block;
+    width: 64px;
+}
+.cart {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: 1px solid black;
+    padding: 1rem;
+}
