@@ -5,30 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Homework</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <table>
-        <tr class="cinema__item">
-            <td>Cinema Name 1</td>
-            <td>25$</td>
-        </tr>
-        <tr class="cinema__item">
-            <td></td>
-            <td>35$</td>
-        </tr>
-        <tr class="cinema__item">
-            <td>Cinema Name 3</td>
-            <td>75$</td>
-        </tr>
-        <tr class="cinema__item">
-            <td>Cinema Name 4</td>
-            <td></td>
-        </tr>
-        <tr class="cinema__item">
-            <td>Cinema Name 5</td>
-            <td>75$</td>
-        </tr>
-    </table>
+    <div id="app">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>age</th>
+                    <th>adress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in persons">
+                    <td 
+                        v-for="(value, key) in item" 
+                        v-on:click="onClick(index,key,value)"
+                        >{{value}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <input type="text" v-model="buffer.value">
+        <button v-on:click="apply">Apply</button>
+    </div>
 <script src="main.js"></script>
 </body>
 </html>
